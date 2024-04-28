@@ -3,13 +3,12 @@ import { css, Global } from '@emotion/react';
 const GlobalStyled = () => {
   return <Global styles={css`
     @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100..900&display=swap');
-    
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");    
     * {
       box-sizing: border-box;
       padding: 0;
       margin: 0;
-      font-family: "Noto Sans KR", sans-serif;
+      font-family: "Pretendard Variable", sans-serif;
       font-optical-sizing: auto;
     },
     ul,li,ol {
@@ -19,6 +18,12 @@ const GlobalStyled = () => {
     a {
       color: inherit;
       text-decoration: none;
+    },
+    p {
+      font-weight: 300;
+    },
+    strong {
+      font-weight: 600;
     },
   `} />
 };
