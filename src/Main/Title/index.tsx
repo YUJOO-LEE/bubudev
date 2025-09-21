@@ -33,20 +33,39 @@ const Styled = {
         background-position: center -200px;
       }
     }
-    height: 100dvh;
-    //height: calc(100dvh + 200px);
-    //max-height: 1000px;
+
+    height: calc(100dvh + 200px);
+    max-height: 1000px;
     display: grid;
     grid-template-rows: 1fr auto;
-    background: url('/assets/images/bg-small.jpg') no-repeat center/cover;
-    //animation: bgMove 60s linear infinite alternate;
-    
-    //&:after {
-    //  content: '';
-    //  display: block;
-    //  height: 200px;
-    //}
-  ,
+    background: url('/assets/images/bg-small.jpg') no-repeat center/max(100%, calc(100vh + 200px)) auto;
+    animation: bgMove 60s linear infinite alternate;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 200px;
+    }
+
+    /* webkit 브라우저용 */
+    -webkit-mask-image: -webkit-linear-gradient(to bottom,
+      black 0%,
+      black calc(100% - 200px),
+      transparent 100%
+    );
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+
+    /* 표준 브라우저용 */
+    mask-image: linear-gradient(to bottom,
+      black 0%,
+      black calc(100% - 200px),
+      transparent 100%
+    );
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-position: center;,
   `,
   Inner: styled.div`
     position: relative;

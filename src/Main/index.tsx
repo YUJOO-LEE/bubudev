@@ -1,10 +1,28 @@
+import { useRef } from 'react';
 import styled from '@emotion/styled';
+import { Flower } from './@components/Flower';
+import { Gallery } from './Gallery';
+import { Info } from './Info';
+import { Message } from './Message';
+import { Notification } from './Notification';
 import { Title } from './Title';
 
 export const Main = () => {
+  const scrollSection = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+
   return (
     <Styled.Wrapper>
       <Title/>
+      <Gallery galleryRef={galleryRef} />
+      <Styled.ScrollSection ref={scrollSection}>
+        <Flower wrapper={scrollSection} gallery={galleryRef} />
+        <Styled.Content>
+          <Message />
+          <Info />
+          <Notification />
+        </Styled.Content>
+      </Styled.ScrollSection>
     </Styled.Wrapper>
   )
 };
@@ -18,17 +36,6 @@ const Styled = {
   ScrollSection: styled.div`
     position: relative;
     height: calc(4315px + 2000px - 100dvh);
-
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -200px;
-      left: 0;
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(to bottom, #FFF7EE00, #FFF7EEFF);
-    }
   `,
   Content: styled.div`
     position: absolute;
