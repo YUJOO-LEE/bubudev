@@ -28,7 +28,7 @@ export const Gallery = (props: Props) => {
             { target: wrapper, edge: 'start', threshold: 1 },
             { target: wrapper, edge: 'end', threshold: 1 },
           ],
-        }),
+        }) as any,
       },
     );
   }, [galleryRef]);

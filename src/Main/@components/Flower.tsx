@@ -30,7 +30,7 @@ export const Flower = (props: Props) => {
             { target: wrapperElement, edge: 'start', threshold: 1 },
             { target: wrapperElement, edge: 'end', threshold: 1 },
           ],
-        }),
+        }) as any,
       },
     );
   }, [wrapper]);
@@ -55,7 +55,7 @@ export const Flower = (props: Props) => {
             { target: galleryElement, edge: "start", threshold: 1 },
             { target: galleryElement, edge: "end", threshold: 1 }
           ]
-        })
+        }) as any
       }
     );
   }, [gallery]);
