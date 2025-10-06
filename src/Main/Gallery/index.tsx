@@ -70,6 +70,7 @@ const Styled = {
     margin-top: -650px; /* jeju-container랑 겹치도록 */
     transform: translateX(0);
     will-change: transform, opacity;
+    gap: 1rem;
   `,
   Title: styled.p`
     position: sticky;
@@ -86,6 +87,7 @@ const Styled = {
     width: auto;
     flex-shrink: 0;
     background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
     & figure {
       overflow: hidden;

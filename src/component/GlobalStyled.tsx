@@ -13,6 +13,8 @@ const GlobalStyled = () => {
     },
     body {
       background-color: #FFF7EE;
+      width: 100%;
+      overflow-x: hidden;
     }
     ul,li,ol {
       list-style: none;
