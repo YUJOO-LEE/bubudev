@@ -59,7 +59,7 @@ const Styled = {
     width: 100%;
     max-width: min(90%, 40rem);
   `,
-  Title: styled.h2`
+  Title: styled.div`
     display: grid;
     gap: 1rem;
     justify-items: center;

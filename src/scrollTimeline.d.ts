@@ -1,31 +1,21 @@
-// Polyfill for ScrollTimeline
-interface ScrollTimelineOffset {
-  target?: Element;
-  edge?: 'start' | 'end';
-  threshold?: number;
-}
-
-interface ScrollTimelineOptions {
-  source?: Element;
-  orientation?: 'block' | 'inline' | 'horizontal' | 'vertical';
-  scrollOffsets?: ScrollTimelineOffset[];
-}
-
+// src/types/scroll-timeline.d.ts
 declare global {
-  class ScrollTimeline {
-    constructor(options?: ScrollTimelineOptions);
-  }
-  
-  class ViewTimeline extends ScrollTimeline {
-    constructor(options?: ScrollTimelineOptions & {
-      subject?: Element;
-      range?: 'cover' | 'contain' | 'start' | 'end';
-    });
+  interface ScrollTimeline extends AnimationTimeline {
+    currentTime: number | null;
   }
 
-  interface KeyframeAnimationOptions {
-    timeline?: ScrollTimeline | ViewTimeline;
+  interface ScrollTimelineOptions {
+    scrollOffsets?: Array<{
+      target: Element;
+      edge: 'start' | 'end';
+      threshold: number;
+    }>;
   }
+
+  let ScrollTimeline: {
+    prototype: ScrollTimeline;
+    new(options?: ScrollTimelineOptions): ScrollTimeline;
+  };
 }
 
 export {};
