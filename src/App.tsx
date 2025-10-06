@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { NavermapsProvider } from 'react-naver-maps';
 import { Main } from './Main';
 
 const App = () => {
@@ -14,18 +15,22 @@ const App = () => {
         { backgroundColor: '#deeab3', offset: 1 },
       ],
       {
-        fill: "both",
+        fill: 'both',
         timeline: new ScrollTimeline({
           scrollOffsets: [
-            { target: document.body, edge: "start", threshold: 1 },
-            { target: document.body, edge: "end", threshold: 1 }
-          ]
-        })
+            { target: document.body, edge: 'start', threshold: 1 },
+            { target: document.body, edge: 'end', threshold: 1 },
+          ],
+        }),
       })
   }, []);
 
   return (
-    <Main/>
+    <NavermapsProvider
+      ncpKeyId="oyo4sfsgf5"
+    >
+      <Main/>
+    </NavermapsProvider>
   )
 };
 

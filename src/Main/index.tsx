@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Flower } from './@components/Flower';
 import { Gallery } from './Gallery';
 import { Info } from './Info';
+import { Map } from './Map';
 import { Message } from './Message';
 import { Notification } from './Notification';
 import { Title } from './Title';
@@ -21,6 +22,7 @@ export const Main = () => {
           <Message />
           <Info />
           <Notification />
+          <Map />
         </Styled.Content>
       </Styled.ScrollSection>
     </Styled.Wrapper>
