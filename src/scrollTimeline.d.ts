@@ -1,7 +1,8 @@
-// src/types/scroll-timeline.d.ts
+// src/types/scroll-timeline.d.ts  
 declare global {
+  // KeyframeAnimationOptions에 timeline 속성 추가 (any 타입으로 우회)
   interface KeyframeAnimationOptions {
-    timeline?: any;
+    timeline?: unknown;
   }
 
   interface ScrollTimelineOptions {
@@ -15,8 +16,7 @@ declare global {
   }
 
   interface ScrollTimeline {
-    readonly currentTime: any;
-    readonly duration: any;
+    readonly currentTime: CSSNumberish | null;
     readonly phase: 'inactive' | 'before' | 'active' | 'after';
     source: Element | null;
     orientation: 'block' | 'inline' | 'horizontal' | 'vertical';
