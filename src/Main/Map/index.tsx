@@ -133,6 +133,7 @@ const Styled = {
     transition: background-color 0.3s ease;
     border: none;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+    color: #333;
 
     &:hover {
       background-color: #FFFFFF80;

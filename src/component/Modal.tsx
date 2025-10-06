@@ -90,6 +90,9 @@ const Styled = {
     padding: 0.725rem 0;
     box-sizing: border-box;
     transition: background 200ms;
+    color: #555;
+    font-size: 0.8rem;
+    font-weight: 400;
 
     &:hover {
       background: #DDD;

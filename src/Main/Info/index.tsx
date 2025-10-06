@@ -144,6 +144,7 @@ const Styled = {
     font-weight: 500;
     padding: 0.725rem 1rem;
     transition: background-color 0.3s ease;
+    color: #333;
 
     &:hover {
       background-color: #FFFFFF80;

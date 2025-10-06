@@ -74,6 +74,7 @@ const Styled = {
     padding: 0.725rem 1rem;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    color: #333;
     
     &:hover {
       background-color: #FFFFFF80;
