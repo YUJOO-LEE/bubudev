@@ -35,9 +35,7 @@ export const Gallery = (props: Props) => {
 
   return (
     <Styled.Wrapper ref={galleryRef}>
-      <Styled.Title>
-        갤러리
-      </Styled.Title>
+      <Styled.Flower />
       <Styled.Inner ref={innerRef}>
         {[...Array(6)].map((_, index) => (
           <Styled.Item key={index}>
@@ -71,15 +69,14 @@ const Styled = {
     transform: translateX(0);
     will-change: transform, opacity;
   `,
-  Title: styled.p`
+  Flower: styled.div`
     position: sticky;
     top: 0;
-    width: 360px;
-    margin: 0 auto;
-    padding-top: 4rem;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 400;
+    left: 50%;
+    width: 50dvw;
+    height: 100dvh;
+    transform: translateX(-50%);
+    background: url('/assets/images/wedding_bouquet.png') no-repeat center/contain;
   `,
   Item: styled.div`
     position: relative;
