@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import styled from '@emotion/styled';
 import { Flower } from './@components/Flower';
+import { Bank } from './Bank';
 import { Gallery } from './Gallery';
 import { Info } from './Info';
 import { Map } from './Map';
@@ -23,6 +24,7 @@ export const Main = () => {
           <Info />
           <Notification />
           <Map />
+          <Bank />
         </Styled.Content>
       </Styled.ScrollSection>
     </Styled.Wrapper>
