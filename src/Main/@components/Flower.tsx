@@ -36,7 +36,7 @@ export const Flower = (props: Props) => {
             { target: wrapperElement, edge: 'start', threshold: 1 },
             { target: wrapperElement, edge: 'end', threshold: 1 },
           ],
-        }) as ScrollTimeline,
+        }) as any,
       },
     );
   }, [wrapper]);
