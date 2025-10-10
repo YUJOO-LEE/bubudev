@@ -152,7 +152,7 @@ const Styled = {
   `,
   ZoomImage: styled.img`
     width: 90dvw;
-    height: 90dvh;
+    height: 80dvh;
     object-fit: contain;
   `,
 };
