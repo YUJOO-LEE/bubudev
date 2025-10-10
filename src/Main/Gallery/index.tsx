@@ -1,99 +1,158 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Modal } from '../../component/Modal';
+
+const images = [
+  { src: "/assets/images/pic_2.jpg", transform: "rotate(5deg)" },
+  { src: "/assets/images/pic_3.jpg", transform: "rotate(-7deg) translateX(-5%)" },
+  { src: "/assets/images/pic_4.jpg", transform: "rotate(-12deg) translateX(5%)" },
+  { src: "/assets/images/pic_5.jpg", transform: "rotate(8deg)" },
+  { src: "/assets/images/pic_6.jpg", transform: "rotate(5deg)", gridColumn: "span 2" }
+];
 
 type Props = {
-  galleryRef: React.RefObject<HTMLDivElement>;
+  src: string;
+  style: React.CSSProperties;
+  isShow: boolean;
+  onClick: () => void;
 };
 
-export const Gallery = (props: Props) => {
-  const { galleryRef } = props;
-
-  const innerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!innerRef.current || !galleryRef.current) return;
-    const wrapper = galleryRef.current;
-    const inner = innerRef.current;
-    inner.animate(
-      [
-        { opacity: 0, offset: 0 },
-        { transform: 'translateX(0)', opacity: 1, offset: 0.1 },
-        { transform: 'translateX(calc(-100% + 100dvw)', opacity: 1, offset: 0.9 },
-        { opacity: 0, transform: 'translateX(calc(-100% + 100dvw)', offset: 1 },
-      ],
-      {
-        fill: 'both',
-        timeline: new ScrollTimeline({
-          scrollOffsets: [
-            { target: wrapper, edge: 'start', threshold: 1 },
-            { target: wrapper, edge: 'end', threshold: 1 },
-          ],
-        }) as any,
-      },
-    );
-  }, [galleryRef]);
+const Image = (props: Props) => {
+  const { src, style, isShow, onClick } = props;
 
   return (
-    <Styled.Wrapper ref={galleryRef}>
-      <Styled.Flower />
-      <Styled.Inner ref={innerRef}>
-        {[...Array(6)].map((_, index) => (
-          <Styled.Item key={index}>
-            <figure>
-              <img src={`/assets/images/pic_${index + 1}.jpg`} alt="사진"/>
-            </figure>
-          </Styled.Item>
+    <Styled.Item style={style} className={isShow ? 'show' : ''} onClick={onClick}>
+      <img src={src} alt="사진"/>
+    </Styled.Item>
+  );
+};
+
+export const Gallery = () => {
+  const modalRef = useRef<HTMLDialogElement>(null);
+
+  const [target, setTarget] = useState<number>(0);
+  const [modalImage, setModalImage] = useState<string>('');
+
+  const handleImageClick = (src: string) => () => {
+    setModalImage(src);
+    modalRef.current?.showModal();
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTarget((prev) => (prev < 4 ? prev + 1 : 0));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Styled.Wrapper>
+      <Styled.Title>
+        <img src="/assets/images/title.png" alt="" />
+        <h2>
+          갤러리
+        </h2>
+        <p>
+          클릭하시면 사진을 크게 보실 수 있습니다
+        </p>
+      </Styled.Title>
+      <Styled.Inner>
+        {images.map((image, index) => (
+          <Image
+            key={index}
+            isShow={target === index}
+            style={{
+              transform: image.transform,
+              ...(image.gridColumn && { gridColumn: image.gridColumn })
+            }}
+            src={image.src}
+            onClick={handleImageClick(image.src)}
+          />
         ))}
       </Styled.Inner>
+      <Modal modalRef={modalRef}>
+        <Styled.ZoomImage src={modalImage} alt="사진"/>
+      </Modal>
     </Styled.Wrapper>
   );
 };
 
 const Styled = {
   Wrapper: styled.div`
-    position: absolute;
-    left: 0;
-    top: 2850px;
-    width: 100%;
-    height: 2000px;
-    z-index: 100;
+    margin: 0 auto;
+    max-width: 40rem;
+    display: grid;
+    gap: 3rem;
   `,
-  Inner: styled.div`
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    width: 850dvw;
-    height: 100dvh;
-    margin-top: -650px; /* jeju-container랑 겹치도록 */
-    transform: translateX(0);
-    will-change: transform, opacity;
-  `,
-  Flower: styled.div`
-    position: sticky;
-    top: 0;
-    left: 50%;
-    width: 50dvw;
-    height: 100dvh;
-    transform: translateX(-50%);
-    background: url('/assets/images/wedding_bouquet.png') no-repeat center/contain;
-  `,
-  Item: styled.div`
+  Title: styled.div`
     position: relative;
-    background: #fff;
-    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
 
-    & figure {
-      overflow: hidden;
-      width: 90dvw;
-      height: 70dvh;
-      margin: auto;
+    & h2 {
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: 400;
+      text-align: center;
+      padding: 0.5rem 0;
+      box-sizing: border-box;
+      color: #fff;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     }
 
+    & p {
+      font-size: 0.8rem;
+      color: #888;
+    }
+    & img {
+      position: absolute;
+      width: 8rem;
+      z-index: -1;
+      left: 50%;
+      top: -0.1rem;
+      transform: translateX(-50%);
+    }
+  `,
+  Inner: styled.div`
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+
+    &:has(:hover) {
+      &>div:hover {
+        z-index: 10;
+        transform: scale(1.1) !important;
+      }
+      &>div:not(:hover) {
+        filter: blur(1px);
+        opacity: 0.7;
+      }
+    }
+  `,
+  Item: styled.div`
+    padding: 0.5rem 0.5rem 2rem;
+    display: grid;
+    background: #fff;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    transition: transform 300ms, filter 500ms, opacity 500ms;
+    cursor: pointer;
+    
     & img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
+    
+    &.show {
+      z-index: 1;
+      transform: scale(1.05) !important;
+    }
+  `,
+  ZoomImage: styled.img`
+    width: 90dvw;
+    height: 90dvh;
+    object-fit: contain;
   `,
 };

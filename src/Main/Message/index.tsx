@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 
 export const Message = () => {
   return (
-    <>
+    <Styled.Wrapper>
       <Styled.Title>
+        <Styled.Image src="/assets/images/title.png" alt="" />
         우리 <span>드디어</span> 결혼합니다
       </Styled.Title>
       <Styled.Message>
@@ -12,16 +13,17 @@ export const Message = () => {
         이 기쁜 날을 함께 나누고 싶습니다.<br/>
         많은 축복과 격려 부탁드립니다.
       </Styled.Message>
-    </>
+    </Styled.Wrapper>
   );
 };
 
 const Styled = {
+  Wrapper: styled.div`
+    display: grid;
+    gap: 1.5rem;
+  `,
   Title: styled.div`
-    position: absolute;
-    top: 4%;
-    left: 0;
-    width: 100%;
+    position: relative;
     text-align: center;
     font-size: 1.5rem;
     
@@ -30,7 +32,7 @@ const Styled = {
         0% {
           transform: rotate(-10deg) translateY(-2%);
         }
-        50% {
+        100% {
           transform: rotate(10deg) translateY(-2%);
         }
       }
@@ -39,22 +41,21 @@ const Styled = {
       font-size: 2.2rem;
       display: inline-block;
       animation: bounce 1s infinite alternate;
-    }
-
-    @media (max-width: 768px) {
-      top: 2%;
+      color: #fff;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     }
   `,
-  Message: styled.div`
+  Image: styled.img`
     position: absolute;
-    top: 6%;
-    width: 100%;
+    width: 7.5rem;
+    z-index: -1;
+    left: 50%;
+    top: -0.2rem;
+    transform: translateX(calc(-50% - 2rem));
+  `,
+  Message: styled.div`
     font-size: 0.9rem;
     line-height: 1.8;
     text-align: center;
-    
-    @media (max-width: 768px) {
-      top: 4%;
-    }
   `,
 };

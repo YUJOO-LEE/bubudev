@@ -14,7 +14,8 @@ export const Bank = () => {
   return (
     <Styled.Wrapper>
       <Styled.Title>
-        마음 전하실 곳
+        <img src="/assets/images/title.png" alt="" />
+        <h2>마음 전하실 곳</h2>
       </Styled.Title>
       <Styled.Content>
         모든 분들이 결혼식에 참석해 주신다면<br/>
@@ -37,21 +38,38 @@ export const Bank = () => {
 
 const Styled = {
   Wrapper: styled.div`
-    position: absolute;
-    left: 50%;
-    top: 91%;
-    transform: translateX(-50%);
+    margin: 10rem auto 0;
     display: grid;
     gap: 3rem;
     width: 100%;
     max-width: min(90%, 40rem);
   `,
   Title: styled.div`
+    position: relative;
     display: grid;
     gap: 1rem;
     justify-items: center;
-    font-size: 1.5rem;
-    font-weight: 400;
+
+    & h2 {
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: 400;
+      text-align: center;
+      padding: 0.5rem 0;
+      box-sizing: border-box;
+      color: #fff;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    }
+
+    & img {
+      position: absolute;
+      width: 12rem;
+      height: 4rem;
+      z-index: -1;
+      left: 50%;
+      top: -0.5rem;
+      transform: translateX(-50%);
+    }
   `,
   Content: styled.div`
     font-size: 0.9rem;

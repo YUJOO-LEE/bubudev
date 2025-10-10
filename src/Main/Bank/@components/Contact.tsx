@@ -108,7 +108,7 @@ const Styled = {
     font-size: 0.8rem;
     font-weight: 400;
     background-color: #f0f0f0;
-    border-radius: 4px;
+    border-radius: 1rem;
     padding: 0.2rem 0.5rem;
     cursor: pointer;
     transition: 0.3s;

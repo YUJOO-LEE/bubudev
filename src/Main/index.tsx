@@ -1,6 +1,6 @@
-import { useRef } from 'react';
 import styled from '@emotion/styled';
-import { Flower } from './@components/Flower';
+import { useEffect, useRef } from 'react';
+import { Flower } from './@components/Flower.tsx';
 import { Bank } from './Bank';
 import { Gallery } from './Gallery';
 import { Info } from './Info';
@@ -10,43 +10,87 @@ import { Notification } from './Notification';
 import { Title } from './Title';
 
 export const Main = () => {
-  const scrollSection = useRef<HTMLDivElement>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!contentRef.current) return;
+
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      const scaleStart = windowHeight * 0.3;
+      const scaleEnd = windowHeight;
+      const scale = scrollY < scaleStart ? 0.6 :
+                   scrollY >= scaleEnd ? 1.0 :
+                   0.6 + (0.4 * (scrollY - scaleStart) / (scaleEnd - scaleStart));
+
+      const borderRadius = scale < 1 ? 2 : 0;
+
+      const body = document.body;
+
+      if (body.style.top) return;
+      contentRef.current.style.transform = `scale(${scale})`;
+      contentRef.current.style.borderRadius = `${borderRadius}rem ${borderRadius}rem 0 0`;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!contentRef.current) return;
+    contentRef.current.animate(
+      [
+        { backgroundColor: '#FFFFFF', offset: 0.4 },
+        { backgroundColor: '#FFF7EE', offset: 0.5 },
+        { backgroundColor: '#ffeef7', offset: 0.7 },
+        { backgroundColor: '#fbffda', offset: 0.9 },
+        { backgroundColor: '#deeab3', offset: 1 },
+      ],
+      {
+        fill: 'both',
+        timeline: new ScrollTimeline({
+          scrollOffsets: [
+            { target: contentRef.current, edge: 'start', threshold: 1 },
+            { target: contentRef.current, edge: 'end', threshold: 1 },
+          ],
+        }) as any,
+      })
+  }, []);
 
   return (
     <Styled.Wrapper>
-      <Title/>
-      <Gallery galleryRef={galleryRef} />
-      <Styled.ScrollSection ref={scrollSection}>
-        <Flower wrapper={scrollSection} gallery={galleryRef} />
-        <Styled.Content>
-          <Message />
-          <Info />
-          <Notification />
-          <Map />
-          <Bank />
-        </Styled.Content>
-      </Styled.ScrollSection>
+      <Title />
+      <Styled.Content ref={contentRef}>
+        <Flower wrapper={contentRef} />
+        <Message />
+        <Info />
+        <Notification />
+        <Gallery />
+        <Map />
+        <Bank />
+      </Styled.Content>
     </Styled.Wrapper>
   )
 };
 
 const Styled = {
   Wrapper: styled.div`
-    width: 100dvw;
-    min-height: 100dvh;
-    contain: paint;
-  `,
-  ScrollSection: styled.div`
     position: relative;
-    height: calc(4315px + 2000px - 100dvh);
+    overflow: hidden;
   `,
   Content: styled.div`
-    position: absolute;
-    left: 50dvw;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-50%);
+    position: relative;
+    background: #fff;
+    border-radius: 4rem 4rem 0 0;
+    min-height: 100dvh;
+    margin-top: 100dvh;
+    padding: 5rem 0;
+    transition: transform 100ms, border-radius 300ms;
+    transform-origin: center top;
+    z-index: 10;
+    box-shadow: 0 -1rem 4rem rgba(0, 0, 0, 0.1), 0 -0.5rem 1rem rgba(0, 0, 0, 0.1);
   `,
 };

@@ -21,8 +21,9 @@ export const Info = () => {
   return (
     <Styled.Wrapper ref={ref}>
       <Styled.Box isShow={isShow}>
-        <Styled.Title style={{ textAlign: 'right' }}>신랑</Styled.Title>
+        <Styled.Title className="groom">신랑</Styled.Title>
         <Styled.Name>
+          <Styled.BlackFlower src="/assets/images/black-flower.png" alt="" />
           <p>박상원 · 최효순<span>의 아들</span></p>
           <strong>박형준</strong>
         </Styled.Name>
@@ -31,7 +32,7 @@ export const Info = () => {
         </Styled.Button>
       </Styled.Box>
       <Styled.Box isShow={isShow} style={{ transitionDelay: '300ms' }}>
-        <Styled.Title style={{ textAlign: 'left' }}>신부</Styled.Title>
+        <Styled.Title className="bride">신부</Styled.Title>
         <Styled.Name>
           <p>이인재 · 권희숙<span>의 딸</span></p>
           <strong>이유주</strong>
@@ -52,12 +53,7 @@ export const Info = () => {
 
 const Styled = {
   Wrapper: styled.div`
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    padding: 17rem 10% 8rem;
+    padding: 48rem 10% 20rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
@@ -65,17 +61,16 @@ const Styled = {
     background: url('/assets/images/info.jpg') no-repeat center/cover;
 
     @media (max-width: 768px) {
-      top: 7%;
-      padding: 10rem 10% 8rem;
+      padding: 20rem 10% 5rem;
       grid-template-columns: 1fr;
-      gap: 5rem;
+      gap: 4rem;
     }
 
     /* webkit 브라우저용 */
     -webkit-mask-image: -webkit-linear-gradient(to bottom,
     transparent 0%,
     black 200px,
-    black calc(100% - 200px),
+    black calc(100% - 100px),
     transparent 100%
     );
     -webkit-mask-size: 100% 100%;
@@ -86,7 +81,7 @@ const Styled = {
     mask-image: linear-gradient(to bottom,
     transparent 0%,
     black 200px,
-    black calc(100% - 200px),
+    black calc(100% - 100px),
     transparent 100%
     );
     mask-size: 100% 100%;
@@ -107,6 +102,7 @@ const Styled = {
     display: grid;
   `,
   Name: styled.div`
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -121,6 +117,13 @@ const Styled = {
       font-size: 0.9rem;
     }
   `,
+  BlackFlower: styled.img`
+    position: absolute;
+    transform: translate(-80%, 8%);
+    width: 4rem;
+    opacity: 0.6;
+    z-index: -1;
+  `,
   Title: styled.div`
     position: absolute;
     top: -1.8rem;
@@ -129,10 +132,21 @@ const Styled = {
     padding: 0 1rem;
     font-weight: 600;
     color: #fff;
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    &.groom {
+      text-align: right;
+    }
+    &.bride {
+      text-align: left;
+    }
 
     @media (max-width: 768px) {
-      text-align: left !important;
+      &.groom {
+        text-align: left;
+      }
+      &.bride {
+        text-align: right;
+      }
     }
   `,
   Button: styled.button`

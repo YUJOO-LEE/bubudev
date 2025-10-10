@@ -9,6 +9,9 @@ export const Title = () => {
       <Styled.Inner>
         <Styled.Date/>
         <Styled.Wedding/>
+        <Styled.Time>
+          토요일 오후 5시
+        </Styled.Time>
         <Styled.Text>
           <span>박</span>
           <span>형</span>
@@ -19,6 +22,7 @@ export const Title = () => {
           <span>주</span>
         </Styled.Text>
       </Styled.Inner>
+      <Styled.Arrow />
     </Styled.Wrapper>
   );
 };
@@ -34,38 +38,22 @@ const Styled = {
       }
     }
 
-    height: calc(100dvh + 200px);
-    max-height: 1000px;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    background: url('/assets/images/bg-small.jpg') no-repeat center/max(100%, calc(100vh + 200px)) auto;
-    animation: bgMove 60s linear infinite alternate;
-
     &:after {
       content: '';
       display: block;
       height: 200px;
     }
 
-    /* webkit 브라우저용 */
-    -webkit-mask-image: -webkit-linear-gradient(to bottom,
-      black 0%,
-      black calc(100% - 200px),
-      transparent 100%
-    );
-    -webkit-mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-
-    /* 표준 브라우저용 */
-    mask-image: linear-gradient(to bottom,
-      black 0%,
-      black calc(100% - 200px),
-      transparent 100%
-    );
-    mask-size: 100% 100%;
-    mask-repeat: no-repeat;
-    mask-position: center;,
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    background: url('/assets/images/bg-small.jpg') no-repeat center/max(100%, calc(100dvh + 200px)) auto;
+    animation: bgMove 60s linear infinite alternate;
   `,
   Inner: styled.div`
     position: relative;
@@ -111,6 +99,17 @@ const Styled = {
     animation: fadeIn 1s ease 1s forwards;
     will-change: filter;
   `,
+  Time: styled.div`
+    @keyframes fade-in {
+      to { opacity: 1; }
+    }
+    opacity: 0;
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fade-in 1000ms 900ms ease forwards;
+  `,
   Text: styled.p`
     @keyframes fadeIn {
       to { opacity: 1; }
@@ -129,12 +128,35 @@ const Styled = {
       animation: fadeIn 200ms ease forwards;
     }
     
-    & span:nth-of-type(1) { animation-delay: 0s; }
-    & span:nth-of-type(2) { animation-delay: 0.1s; }
-    & span:nth-of-type(3) { animation-delay: 0.2s; margin-right: 2px; }
-    & span:nth-of-type(4) { animation-delay: 0.4s; margin-right: 2px; }
-    & span:nth-of-type(5) { animation-delay: 0.6s; }
-    & span:nth-of-type(6) { animation-delay: 0.7s; }
-    & span:nth-of-type(7) { animation-delay: 0.8s; }
+    & span:nth-of-type(1) { animation-delay: 1.5s; }
+    & span:nth-of-type(2) { animation-delay: 1.6s; }
+    & span:nth-of-type(3) { animation-delay: 1.7s; margin-right: 2px; }
+    & span:nth-of-type(4) { animation-delay: 1.9s; margin-right: 2px; }
+    & span:nth-of-type(5) { animation-delay: 2.1s; }
+    & span:nth-of-type(6) { animation-delay: 2.2s; }
+    & span:nth-of-type(7) { animation-delay: 2.3s; }
+  `,
+  Arrow: styled.div`
+    @keyframes arrow-bounce {
+      0% {
+        transform: rotate(-45deg) translate(-50%, 0);
+      }
+      50% {
+        transform: rotate(-45deg) translate(-60%, 10%);
+      }
+      100% {
+        transform: rotate(-45deg) translate(-50%, 0);
+      }
+    }
+
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: translateX(-50%) rotate(-45deg);
+    animation: arrow-bounce 1s ease infinite;
   `,
 };

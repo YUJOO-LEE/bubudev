@@ -11,10 +11,15 @@ const GlobalStyled = () => {
       font-family: "Pretendard Variable", sans-serif;
       font-optical-sizing: auto;
     },
+    html, body {
+      overscroll-behavior: none;
+      overscroll-behavior-y: none;
+    }
     body {
       background-color: #FFF7EE;
       width: 100%;
       overflow-x: hidden;
+      color: #333;
     }
     ul,li,ol {
       list-style: none;

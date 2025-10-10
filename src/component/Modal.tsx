@@ -83,7 +83,7 @@ const Styled = {
   Close: styled.button`
     cursor: pointer;
     border: none;
-    border-radius: 0.325rem;
+    border-radius: 1rem;
     background: #EFEFEF;
     width: 100%;
     max-width: 400px;

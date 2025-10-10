@@ -8,9 +8,9 @@ export const Map = () => {
   return (
     <Styled.Wrapper>
       <Styled.Title>
+        <img src="/assets/images/title.png" alt="" />
         <h2>찾아오시는 길</h2>
         <p>서울특별시 강남구 도산대로 318 SB타워 G층 마리아쥬스퀘어</p>
-
         <Styled.ButtonWrapper>
           <Styled.Button href="https://naver.me/FwjBieLy" target="_blank" rel="noopener noreferrer">
             네이버지도
@@ -50,26 +50,41 @@ export const Map = () => {
 
 const Styled = {
   Wrapper: styled.div`
-    position: absolute;
-    left: 50%;
-    top: 72%;
-    transform: translateX(-50%);
+    margin: 10rem auto 0;
     display: grid;
     gap: 3rem;
     width: 100%;
     max-width: min(90%, 40rem);
   `,
   Title: styled.div`
+    position: relative;
     display: grid;
     gap: 1rem;
     justify-items: center;
+
     & h2 {
+      width: 100%;
       font-size: 1.5rem;
       font-weight: 400;
+      text-align: center;
+      padding: 0.5rem 0;
+      box-sizing: border-box;
+      color: #fff;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     }
+
     & p {
       font-size: 0.8rem;
       color: #888;
+    }
+    & img {
+      position: absolute;
+      width: 12rem;
+      height: 4rem;
+      z-index: -1;
+      left: 50%;
+      top: -0.5rem;
+      transform: translateX(-50%);
     }
   `,
   MapContainer: styled(Container)`
