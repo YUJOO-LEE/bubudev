@@ -2,39 +2,46 @@ import { css, Global } from '@emotion/react';
 
 const GlobalStyled = () => {
   return <Global styles={css`
-    @import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
-    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");    
     * {
       box-sizing: border-box;
       padding: 0;
       margin: 0;
-      font-family: "Pretendard Variable", sans-serif;
+      font-family: inherit;
       font-optical-sizing: auto;
-    },
+    }
     html, body {
-      overscroll-behavior: none;
-      overscroll-behavior-y: none;
+      scroll-behavior: smooth;
     }
     body {
-      background-color: #FFF7EE;
+      background-color: #fff8ed;
       width: 100%;
-      overflow-x: hidden;
-      color: #333;
+      color: #59343c;
+      font-family: 'Pretendard Variable', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      font-size: 18px;
     }
     ul,li,ol {
       list-style: none;
       padding: 0;
-    },
+    }
     a {
       color: inherit;
       text-decoration: none;
-    },
+    }
     p {
-      font-weight: 300;
-    },
+      font-weight: 400;
+    }
     strong {
       font-weight: 600;
-    },
+    }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    svg { display: block; }
+    ::selection { background: #c5dac5; color: #59343c; }
+    :focus-visible { outline: 2px solid #59343c; outline-offset: 6px; }
+    [id] { scroll-margin-top: 32px; }
+    html[data-motion='off'] { scroll-behavior: auto; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   `} />
 };
 
